@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="resim.jpg" type="image/x-icon">
+    <title>sinema_rezervasyon_APP</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Skranji&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Sinema Rezervasyon Sistemi</h1>
+    <img class="resim" src="sinema.jpg" width="250px" height="150px">
+    <div class="container">
+        <div class="seat" data-seat-number="1">1</div>
+        <div class="seat" data-seat-number="2">2</div>
+        <div class="seat" data-seat-number="3">3</div>
+        <div class="seat" data-seat-number="4">4</div>
+        <div class="seat" data-seat-number="5">5</div>
+        <div class="seat" data-seat-number="6">6</div>
+        <div class="seat" data-seat-number="7">7</div>
+        <div class="seat" data-seat-number="8">8</div>
+        <div class="seat" data-seat-number="9">9</div>
+        <div class="seat" data-seat-number="10">10</div>
+        <div class="seat" data-seat-number="11">11</div>
+        <div class="seat" data-seat-number="12">12</div>
+        <div class="seat" data-seat-number="13">13</div>
+        <div class="seat" data-seat-number="14">14</div>
+        <div class="seat" data-seat-number="15">15</div>
+        <div class="seat" data-seat-number="16">16</div>
+        <div class="seat" data-seat-number="17">17</div>
+        <div class="seat" data-seat-number="18">18</div>
+        <div class="seat" data-seat-number="19">19</div>
+        <div class="seat" data-seat-number="20">20</div>
+        <div class="seat" data-seat-number="21">21</div>
+        <div class="seat" data-seat-number="22">22</div>
+        <div class="seat" data-seat-number="23">23</div>
+        <div class="seat" data-seat-number="24">24</div>
+    </div>
+    <button id="reserve-button" disabled>Rezerve Et</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => 
+        {
+            const seats = document.querySelectorAll(".seat");
+            const reserveButton = document.getElementById("reserve-button");
+
+            let selectedSeats = [];
+
+            seats.forEach(seat => 
+            {
+                seat.addEventListener("click", () => 
+                {
+                    if (!seat.classList.contains("selected")) 
+                    {
+                        seat.classList.add("selected");
+                        selectedSeats.push(seat.getAttribute("data-seat-number"));
+                    } 
+                    else 
+                    {
+                        seat.classList.remove("selected");
+                        selectedSeats = selectedSeats.filter(seatNumber => seatNumber !== seat.getAttribute("data-seat-number"));
+                    }
+                    if (selectedSeats.length > 0) 
+                    {
+                        reserveButton.removeAttribute("disabled");
+                    } 
+                    else 
+                    {
+                        reserveButton.setAttribute("disabled", "true");
+                    }
+                });
+            });
+
+            reserveButton.addEventListener("click", () => 
+            {
+                alert(`Rezerve edilen koltuklar: ${selectedSeats.join(", ")}`);
+            });
+        });
+    </script>
+</body>
+</html>
